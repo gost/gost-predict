@@ -141,7 +141,7 @@ func createPredict(host, datastream, predictTime, span string) (*PredictionRespo
 	obs = append([]Observation{ obNow }, obs...)
 
 	rates := make([]float64, 0)
-	rateTotal := 0.0
+	rateTotal := float64(0.0)
 	lastKnown := 0.0
 	for i := 0; i < len(obs) -1; i++ {
 		t1, _ := time.Parse(layout, obs[i].PhenomenonTime)
@@ -243,7 +243,6 @@ func sendPrediction(w http.ResponseWriter, prediction *PredictionResponse){
 
 	w.Write(b)
 }
-
 
 //JSONMarshal converts the data and converts special characters such as &
 func JSONMarshal(data interface{}, safeEncoding bool) ([]byte, error) {
